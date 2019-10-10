@@ -23,6 +23,7 @@ import time
 pygame.midi.init()
 num_devices = pygame.midi.get_count()
 
+#originale MIDI event list wird vereinfacht
 def uglylist_to_nicelist(midi_input):
     newlist=[]
     flattend = list(itertools.chain(*midi_input))
@@ -45,6 +46,8 @@ def return_midi_device():
                 pass
     return MIDI_DEVICE
 
+
+#Mit MIDI Instrument kommunizieren
 def work(export_file):
     my_device = return_midi_device()
     l=[]
