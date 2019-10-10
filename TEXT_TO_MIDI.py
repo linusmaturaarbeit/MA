@@ -1,3 +1,21 @@
+# Software um Gespieltes zu transkribieren
+# Copyright (C) 2019  Linus Wesp
+#
+# This file is part of "Digitaler Kromarograph"
+#
+# "Digitaler Kromarograph" is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# "Digitaler Kromarograph" is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with "Digitaler Kromarograph".  If not, see <https://www.gnu.org/licenses/>.
+
 #!/usr/bin/env python
 import ast
 from midiutil import MIDIFile
@@ -7,10 +25,6 @@ def return_filename(fname, format):
     timestamp = time.strftime("%Y.%m.%d-%H.%M.%S")
     return "%s%s.%s" %(fname,timestamp, format)
 
-# inputfile = "Q_2019.06.23-22.38.01.txt"
-# givemidiname = return_filename("othertempo", "mid")
-
-
 def read_listtxt_to_list(filename):
      newlist = []
      lines = [line.rstrip('\n') for line in open(filename)]
@@ -18,43 +32,17 @@ def read_listtxt_to_list(filename):
           newlist.append(ast.literal_eval(i))
      return(newlist)
 
-# def seperate_time_and_hand(filename):
-#     list_content = read_listtxt_to_list(filename)
-#     list_only_hands = []
-#     list_only_time_quantized = []
-#
-#
-#     for i in list_content:
-#         list_only_hands.append(i[0])
-#         list_only_time_quantized.append(i[1])
-#     return(list_only_time_quantized, list_only_hands)
-
-
-
 def work(source, out, tempo):
 
     track    = 0    # Track numbers are zero-origined
     channel  = 0    # MIDI Channel
     time     = 0    # In beats
     duration = 2    # In beats
-    #tempo    = 60   # In BPM
     volume   = 100  # 0-127, as per the MIDI standard
-    #pitch    = 60   # MIDI note number
 
     midiinputs = read_listtxt_to_list(source)
     MyMIDI = MIDIFile(1)  # One track, defaults to format 1 (tempo track is created automatically)
     MyMIDI.addTempo(track, time, tempo)
-
-    # midiinputs_quantized, hands = seperate_time_and_hand(source)
-
-    # for i in midiinputs_quantized:
-    #     time = i
-    #     hand = hands[i]
-    #     MyMIDI.addNote(track, channel, pitch, time, duration, volume)
-    #     print(hand)
-    #
-    # with open(out, "wb") as output_file:
-    #     MyMIDI.writeFile(output_file)
 
     for i in midiinputs:
         time = i[1]
@@ -63,12 +51,3 @@ def work(source, out, tempo):
 
     with open(out, "wb") as output_file:
         MyMIDI.writeFile(output_file)
-
-
-    # l = [[0,4],[1,2]]
-    # for i in l:
-    #     hand = i[0]
-    #     time = i[1]
-
-
-# work("QQQ.txt", "yaasbitch.mid", 60)
