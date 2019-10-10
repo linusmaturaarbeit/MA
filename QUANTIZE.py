@@ -22,15 +22,14 @@ import ast
 import math
 from operator import itemgetter
 
-givequantizedfilename ="quantized_midinotes.txt"
-
-def grid_intervall(metrum, quantize_note):
-    metrum = int(float(metrum))
+#Definition erster Viertel und Rastererstellung
+def grid_intervall(tempo, quantize_note):
+    tempo = int(float(tempo))
     quantize_note = int(float(quantize_note))
     normal_tempo = 60
 
     #erster Viertel:
-    first_quart = (normal_tempo / metrum)
+    first_quart = (normal_tempo / tempo)
 
     #Rastererstellung:
     grid_value = (first_quart / quantize_note)
@@ -38,6 +37,7 @@ def grid_intervall(metrum, quantize_note):
     return grid_value
 
 
+#liste aus file wieder in liste einlesen
 def read_listtxt_to_list(filename):
      newlist = []
      lines = [line.rstrip('\n') for line in open(filename)]
@@ -45,7 +45,7 @@ def read_listtxt_to_list(filename):
           newlist.append(ast.literal_eval(i))
      return(newlist)
 
-
+#zwischen linker und rechter hand unterscheiden, wurde nicht angewendet
 def seperate_time_and_hand(filename):
     list_content = read_listtxt_to_list(filename)
     list_only_time = []
@@ -56,6 +56,8 @@ def seperate_time_and_hand(filename):
         list_only_time.append(i[1])
     return(list_only_time, list_only_hands)
 
+
+#Quantisierung
 def work(input_tempo, input_which_quantization, sourcefile, outputfile):
     #erster Viertel:
     grid_value = grid_intervall(input_tempo, input_which_quantization)
