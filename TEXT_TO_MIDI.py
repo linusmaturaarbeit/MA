@@ -21,10 +21,13 @@ import ast
 from midiutil import MIDIFile
 import time
 
+
+#Funktion für Filenames mit Zeitstempel
 def return_filename(fname, format):
     timestamp = time.strftime("%Y.%m.%d-%H.%M.%S")
     return "%s%s.%s" %(fname,timestamp, format)
 
+#liste aus file wieder in liste einlesen
 def read_listtxt_to_list(filename):
      newlist = []
      lines = [line.rstrip('\n') for line in open(filename)]
@@ -32,6 +35,7 @@ def read_listtxt_to_list(filename):
           newlist.append(ast.literal_eval(i))
      return(newlist)
 
+#Schreiben eines MIDI Files
 def work(source, out, tempo):
 
     track    = 0    # Track numbers are zero-origined
