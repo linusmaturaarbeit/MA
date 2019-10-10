@@ -1,3 +1,21 @@
+# Software um Gespieltes zu transkribieren
+# Copyright (C) 2019  Linus Wesp
+#
+# This file is part of "Digitaler Kromarograph"
+#
+# "Digitaler Kromarograph" is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# "Digitaler Kromarograph" is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with "Digitaler Kromarograph".  If not, see <https://www.gnu.org/licenses/>.
+
 import itertools
 import pygame.midi
 import time
@@ -13,6 +31,9 @@ def uglylist_to_nicelist(midi_input):
     newlist.append(flattend[1])
     return newlist
 
+
+#Linux Opensuse Boppad name:    b'BopPad MIDI 1'
+#Windows 10     Boppad name:    b'Boppad'
 def return_midi_device():
     for i in range(num_devices):
         device = pygame.midi.get_device_info(i)
