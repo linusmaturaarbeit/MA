@@ -18,4 +18,4 @@ Installation:
     MuseScore (Notationssoftware, muss in Windows in %path% sein!)
 
   Install:
-    git clone https://github.com/trustedsec/social-engineer-toolkit/ set/
+    git clone https://github.com/linusmaturaarbeit/MA
