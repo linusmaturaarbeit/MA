@@ -18,4 +18,4 @@ Installation:
     MuseScore (Notationssoftware, muss in Windows in %path% sein!)
 
   Install:
-    git clone https://github.com/linusmaturaarbeit/MA
+    git clone https://github.com/linusmaturaarbeit/MA.git
